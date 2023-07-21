@@ -1,0 +1,95 @@
+<script setup>
+import { ref } from 'vue'
+
+const msg = ref("Info Pendaftaran Barudak well");
+let rawHtml = "<li> Punya Spokat Nyala</li> <li>Jaket Gelembung</li> <li> Ripped Jeans</li> "
+const objectOfAttrs = {
+  id: 'container',
+  class: 'wrapper'
+};
+
+let message = ref("Hai Vue JS")
+let seen = " "
+
+let a = 10
+let b = 5
+let c = a + b
+let number = 1;
+let data =[
+  { nama: 'Ujang' ,
+    kelas: 'XII RPL 2',
+    NISN: '001',
+    Alamat: 'Bandung'
+  },
+  {
+    nama: 'Asep',
+    kelas: 'XII RPL 1',
+    NISN: '002',
+    Alamat: 'Garut'
+  },
+  {
+    nama: 'Agus',
+    kelas: 'XII RPL 2',
+    NISN: '003',
+    Alamat: 'Tasik'
+  },
+  {
+    nama: 'Dadang',
+    kelas: 'XII RPL 1',
+    NISN: '004',
+    Alamat: 'Medan'
+  },
+  {
+    nama: 'Siti',
+    kelas: 'XII RPL 2',
+    NISN: '005',
+    Alamat: 'Bandung'
+  }
+]
+</script>
+
+
+<template>
+<form @submit.prevent="onSubmit">
+  <div>
+    <h1>{{ msg }} </h1>
+    <div v-bind="objectofAttrs">Ketentuan masuk:</div>
+    <span v-html="rawHtml"></span>
+    <p span v-if="seen">minimal harus bikin jj pake tongkat baseball</p>
+  <button :disabled="isButtonDisabled">Button</button>&ensp;    
+  <button :disabled="isButtonDisabled">Button</button><br>
+  <a href="url">ISI FORM PENDAFTARAN</a>
+
+  <h1>ARITMATIKA</h1>
+  bil={{ a }} bil={{ b }}<br> hasil bil1 {{ a }} + bil2 {{ b }}= {{ c }}
+  
+  
+  <h1>data siswa</h1>
+     <ol>
+      <li v-for="todo in todos">
+      {{ todo.teks }}
+    </li>
+     </ol>
+
+     <table border="1">
+      <tr >
+        <tr>No</tr>
+        <th>Nama </th>
+        <th>Kelas</th>
+        <th>NISN</th>
+        <th>Alamat</th>
+      </tr>
+      <tr v-for="siswa in data">
+        <td>{{ number++ }}</td>
+        <td>{{ siswa.nama }}</td>
+        <td>{{ siswa.kelas }}</td>
+        <td>{{ siswa.NISN }}</td>
+        <td>{{ siswa.Alamat }}</td>
+      </tr>
+
+    <td></td>
+     </table>
+
+  </div>
+  </form>
+</template>

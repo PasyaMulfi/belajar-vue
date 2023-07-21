@@ -1,32 +1,72 @@
-<script setup>
-import { ref } from 'vue'
-
-const msg = ref("Info Pendaftaran Barudak well");
-let rawHtml = "<li> Punya Spokat Nyala</li> <li>Jaket Gelembung</li> <li> Ripped Jeans</li> "
-const objectOfAttrs = {
-  id: 'container',
-  class: 'wrapper'
-};
-let seen = " "
-
-let a = 10
-let b = 5
-let c = a+b
-</script>
 <template>
-
-<form @submit.prevent="onSubmit">
-  <div>
-    <h1>{{ msg }} </h1>
-    <div v-bind="objectofAttrs">Ketentuan masuk:</div>
-    <span v-html="rawHtml"></span>
-    <p v-if="seen">minimal harus bikin jj pake tongkat baseball</p>
-  <button :disabled="isButtonDisabled">Button</button>&ensp;    
-  <button :disabled="isButtonDisabled">Button</button>
-
-  <h1>ARITMATIKA</h1>
-  bil={{ a }} bil={{ b }}<br> hasil bil1 {{ a }} + bil2 {{ b }}= {{ c }}
-  
+ <div>
+  <h2>Formulir</h2>
+  <form @submit.prevent="submitForm">
+  <label for="">Nama</label>
+  <input class="{'is-invalid' :isInvalidName}" type="text" name="nama" v-model="kontak.nama">
+  <div v-if="isInvalidName" class="error-message">
+  Nama Harus Di Isi!</div>
+  <br>
+  <label for="">Email</label>
+  <input class="{'is-invalid' :isInvalidEmail}" type="email" name="email" v-model="kontak.email">
+  <div v-if="isInvalidEmail" class="error-message">
+    Email Harus Di Isi !
   </div>
+  <br>
+  <button type="submit">Simpan</button>
+  <div id="a"></div>
   </form>
+ </div> 
 </template>
+
+<script>
+import { ref } from 'vue';
+
+export default {
+  data() {
+    return {
+      kontak: {
+        nama: '',
+      },
+      showResult: ref(false),
+      name: ref(''),
+      email: ref(''),
+    };
+  },
+
+  computed: {
+    isInvalidName() {
+      return this.name.length < 1;
+    },
+    isInvalidEmail() {
+      return this.email.length < 1;
+    },
+  },
+
+  methods: {
+    submitForm() {
+      this.name = this.kontak.nama;
+      this.email = this.kontak.email;
+      this.showResult = true;
+      this.isInvalidName = false;
+      this.isInvalidEmail = false;
+    },
+  },
+};
+
+
+
+</script>
+
+<style>
+h1 { 
+  color:  blue;
+}
+.error-message{
+  color: red;
+  margin-top: 5px;
+}
+.is-invalid{
+  border-color: red;
+}
+</style>
